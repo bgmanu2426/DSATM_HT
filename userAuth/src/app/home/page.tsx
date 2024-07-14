@@ -44,10 +44,10 @@ const ProfilePage = () => {
             })
     }
 
-    //Function to get user details
-    const getUserDetails = () => {
-        router.push(`/profile/${userData}`)
-        router.refresh()
+    const uploadDumpFile = (e: any) => {
+        e.preventDefault();
+        setLoading(true);
+
     }
 
     return (
@@ -59,7 +59,7 @@ const ProfilePage = () => {
             />
 
             <div className='flex flex-col space-y-6 items-center justify-center min-h-[70vh]'>
-                <h1 className='font-semibold text-2xl mb-20'>ProfilePage</h1>
+                <h1 className='font-semibold text-2xl mb-20'>Upload Dump File</h1>
                 {!userVerified && <div className="md:max-w-[40vw] max-w-[40vw] w-full bg-red-700 shadow-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5">
                     <div className="flex-1 w-0 p-4">
                         <div className="flex items-start">
@@ -72,11 +72,28 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 </div>}
-                <p>User ID : {userData}</p>
-                <div className='flex'>
-                    <button onClick={getUserDetails} className='m-3 rounded bg-blue-800 hover:bg-blue-500 px-3 py-1 text-white'>Get User Details</button>
-                    <button onClick={handleLogout} className='m-3 rounded bg-red-800 hover:bg-red-500 px-3 py-1 text-white'>{loading ? "Processing" : "Logout"}</button>
+                <div className="col-span-full">
+                    <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
+                        Upload File
+                    </label>
+                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <div className="text-center">
+                            <div className="mt-2 flex text-sm leading-6 text-gray-600">
+                                <label
+                                    htmlFor="file-upload"
+                                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                                >
+                                    <span>Upload a file</span>
+                                    <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                </label>
+                                <p className="pl-1">or drag and drop</p>
+                            </div>
+                            <p className="text-xs leading-5 text-gray-600">only BIN,DMP files supported</p>
+                        </div>
+                    </div>
                 </div>
+                <button onClick={uploadDumpFile} className='m-3 rounded bg-blue-800 hover:bg-blue-500 px-3 py-1 text-white'>{loading ? "Processing" : "Upload"}</button>
+                <button onClick={handleLogout} className='m-3 rounded bg-red-800 hover:bg-red-500 px-3 py-1 text-white'>{loading ? "Processing" : "Logout"}</button>
             </div>
         </>
     )

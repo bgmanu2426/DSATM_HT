@@ -27,7 +27,7 @@ const LoginPage = () => {
             .then((response) => {
                 toast.success(response.data.message, { duration: 1500 });
                 setTimeout(() => {
-                    router.push("/profile");
+                    router.push("/home");
                     router.refresh()
                     setLoading(false);
                 }, 1500);

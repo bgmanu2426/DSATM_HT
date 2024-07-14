@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
     const token = request.cookies.get('token')?.value
 
     if (isPublic && token) {
-        return NextResponse.redirect(new URL('/profile', request.nextUrl))
+        return NextResponse.redirect(new URL('/home', request.nextUrl))
     }
 
     if (!isPublic && !token) {
@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
 export const config = {
     matcher: [
         '/',
-        '/profile',
+        '/home',
         '/login',
         '/signup',
         '/verifyEmail'
